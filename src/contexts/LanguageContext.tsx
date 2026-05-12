@@ -30,7 +30,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.logout': 'تسجيل الخروج',
 
     // Hero Section
-    'hero.title': 'مدرسة تعليم السياقة',
+    'hero.title': 'أوتو إيكول بلوس',
     'hero.subtitle': 'احترف القيادة مع أفضل المدربين',
     'hero.description': 'نقدم لك تجربة تعليمية متميزة للحصول على رخصة القيادة بكل ثقة وأمان',
     'hero.cta.register': 'سجّل الآن',
@@ -125,7 +125,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.logout': 'Déconnexion',
 
     // Hero Section
-    'hero.title': 'Auto-École Excellence',
+    'hero.title': 'Auto Ecole Plus',
     'hero.subtitle': 'Maîtrisez la conduite avec les meilleurs moniteurs',
     'hero.description': 'Nous vous offrons une expérience éducative exceptionnelle pour obtenir votre permis de conduire en toute confiance et sécurité',
     'hero.cta.register': "S'inscrire maintenant",
@@ -220,7 +220,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.logout': 'Logout',
 
     // Hero Section
-    'hero.title': 'Driving School Excellence',
+    'hero.title': 'Auto Ecole Plus',
     'hero.subtitle': 'Master driving with the best instructors',
     'hero.description': 'We offer you an exceptional learning experience to get your driving license with confidence and safety',
     'hero.cta.register': 'Register Now',

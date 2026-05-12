@@ -101,7 +101,7 @@ export const Navbar = () => {
             }
           </div>
           <span className="logo-text">
-            {language === 'ar' ? 'أوتو إيكول' : 'Auto-École'}
+            {language === 'ar' ? 'أوتو إيكول بلوس' : 'Auto Ecole Plus'}
           </span>
         </Link>
 

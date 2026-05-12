@@ -57,7 +57,7 @@ export const Footer = () => {
                   }
                 </div>
                 <span>
-                  {language === 'ar' ? 'أوتو إيكول' : 'Auto-École'}
+                  {language === 'ar' ? 'أوتو إيكول بلوس' : 'Auto Ecole Plus'}
                 </span>
               </Link>
               <p className="footer-desc">{t('hero.description')}</p>
@@ -136,7 +136,7 @@ export const Footer = () => {
         {/* Bottom */}
         <div className="footer-bottom">
           © {new Date().getFullYear()}{' '}
-          {language === 'ar' ? 'أوتو إيكول' : 'Auto-École'} — {t('footer.rights')}
+          {language === 'ar' ? 'أوتو إيكول بلوس' : 'Auto Ecole Plus'} — {t('footer.rights')}
         </div>
 
       </div>
