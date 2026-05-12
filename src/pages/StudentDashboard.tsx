@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useIsMobile } from '../hooks/use-mobile';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import {
@@ -41,6 +42,7 @@ const StudentDashboardContent = () => {
   const { language, dir } = useLanguage();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const t = (ar: string, fr: string, en: string) =>
     language === 'ar' ? ar : language === 'fr' ? fr : en;
@@ -84,7 +86,7 @@ const StudentDashboardContent = () => {
       if (data.teacherId) {
         const { data: t } = await supabase.from('users').select('*').eq('id', data.teacherId).single();
         if (t) setTeacherData(t);
-        const { data: ev } = await supabase.from('evaluations').select('*').eq('id', `${data.teacherId}_${user.uid}`).single();
+        const { data: ev } = await supabase.from('evaluations').select('*').eq('studentId', user.uid).eq('teacherId', data.teacherId).maybeSingle();
         if (ev) setTeacherEval(ev);
       }
     })();
@@ -109,11 +111,11 @@ const StudentDashboardContent = () => {
   }, [user?.uid]);
 
   useEffect(() => {
-    if (!showVideos || !studentData?.teacherId) return;
+    if (!showVideos) return;
     setLoadingVideos(true);
-    supabase.from('educationalVideos').select('*').eq('teacherId', studentData.teacherId)
+    supabase.from('educationalVideos').select('*').order('createdAt', { ascending: false })
       .then(({ data }) => { setVideos(data || []); setLoadingVideos(false); });
-  }, [showVideos, studentData?.teacherId]);
+  }, [showVideos]);
 
   // ── Computed ────────────────────────────────────────────────────────────────
   const payments = studentData?.payments || { code: false, creneau: false, circui: false };
@@ -196,7 +198,7 @@ const StudentDashboardContent = () => {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-darkest)', color: 'var(--text-primary)' }} dir={dir}>
       <Navbar />
-      <main style={{ maxWidth: 1300, margin: '0 auto', padding: '5.5rem 1.5rem 4rem' }}>
+      <main style={{ maxWidth: 1300, margin: '0 auto', padding: isMobile ? '5rem 1rem 3rem' : '5.5rem 1.5rem 4rem' }}>
 
         {/* ── Header card ── */}
         <div style={{ ...card, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -220,7 +222,7 @@ const StudentDashboardContent = () => {
         </div>
 
         {/* ── Stats ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
           {[
             { icon: <BookOpen size={26} />, label: t('دروس الكود', 'Leçons Code', 'Code Lessons'), value: `${codeCount}/10`, color: payments.code ? '#10b981' : '#ef4444', sub: payments.code ? t('مدفوع', 'Payé', 'Paid') : t('غير مدفوع', 'Non payé', 'Unpaid') },
             { icon: <Car size={26} />, label: t('الكرينو', 'Créneau', 'Creneau'), value: `${creneauCount}/15`, color: payments.creneau ? '#10b981' : '#ef4444', sub: payments.creneau ? t('مدفوع', 'Payé', 'Paid') : t('غير مدفوع', 'Non payé', 'Unpaid') },
@@ -237,7 +239,7 @@ const StudentDashboardContent = () => {
         </div>
 
         {/* ── Two-column layout ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '1.5rem' }}>
 
           {/* Upcoming sessions */}
           <div style={card}>
@@ -330,7 +332,7 @@ const StudentDashboardContent = () => {
                 <div style={{ display: 'flex', gap: 3, marginBottom: 6 }}>
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={15} style={{ color: s <= (teacherEval.rating || 0) ? '#f59e0b' : 'var(--border)', fill: s <= (teacherEval.rating || 0) ? '#f59e0b' : 'none' }} />)}
                 </div>
-                {teacherEval.text && <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{teacherEval.text}</p>}
+                {teacherEval.comment && <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{teacherEval.comment}</p>}
               </div>
             )}
           </div>
@@ -488,11 +490,12 @@ const StudentDashboardContent = () => {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-white)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.title}</div>
                   <div style={{ display: 'flex', gap: 10, marginTop: 3, fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                    {v.teacherName && <span>{v.teacherName}</span>}
                     <span style={{ display: 'flex', alignItems: 'center', gap: 3 }}><Eye size={10} />{v.views || 0}</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 3 }}><Heart size={10} />{v.likes || 0}</span>
                   </div>
                 </div>
-                <button onClick={() => window.open(v.videoUrl, '_blank')} style={{ padding: '0.5rem 0.875rem', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)', borderRadius: 'var(--radius-md)', color: '#4f8ef7', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>
+                <button onClick={() => window.open(v.videoUrl || v.cloudinaryUrl, '_blank')} style={{ padding: '0.5rem 0.875rem', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)', borderRadius: 'var(--radius-md)', color: '#4f8ef7', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>
                   {t('مشاهدة', 'Voir', 'Watch')}
                 </button>
               </div>

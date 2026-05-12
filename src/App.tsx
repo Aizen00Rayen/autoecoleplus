@@ -36,6 +36,7 @@ import BookingPublic from "./pages/BookingPublic";
 import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import TestCreateAccounts from "./pages/TestCreateAccounts";
+import AdminSigns from "./pages/AdminSigns";
 
 const queryClient = new QueryClient();
 
@@ -119,13 +120,21 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/admin-settings" 
+            <Route
+              path="/admin-settings"
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <AdminSettings />
                 </ProtectedRoute>
-              } 
+              }
+            />
+            <Route
+              path="/admin-signs"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminSigns />
+                </ProtectedRoute>
+              }
             />
             <Route 
               path="/teacher-dashboard" 

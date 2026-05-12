@@ -5,7 +5,7 @@ import {
   LayoutDashboard, Users, Car, CreditCard, Calendar, Bell,
   Settings, LogOut, TrendingUp, BookOpen, Shield, BarChart2,
   FileText, AlertTriangle, Camera, Upload, Check, Loader2,
-  Info, User, Mail, Phone, ChevronRight, X
+  Info, User, Mail, Phone, ChevronRight, X, SignpostBig
 } from 'lucide-react';
 import { supabase } from '../supabase';
 import { useAuth } from '../contexts/AuthContext';
@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { path: '/admin-bookings',        icon: Calendar,        labelEn: 'Bookings',        labelAr: 'الحجوزات',        labelFr: 'Réservations' },
   { path: '/admin-notifications',   icon: Bell,            labelEn: 'Notifications',   labelAr: 'الإشعارات',       labelFr: 'Notifications' },
   { path: '/admin-reports',         icon: BarChart2,       labelEn: 'Reports',         labelAr: 'التقارير',        labelFr: 'Rapports' },
+  { path: '/admin-signs',            icon: SignpostBig,     labelEn: 'Road Signs',      labelAr: 'علامات المرور',   labelFr: 'Panneaux' },
   { path: '/admin-settings',        icon: Settings,        labelEn: 'Settings',        labelAr: 'الإعدادات',       labelFr: 'Paramètres' },
   { path: '/test',                   icon: Shield,          labelEn: 'Test Accounts',   labelAr: 'حسابات تجريبية', labelFr: 'Comptes test' },
 ];

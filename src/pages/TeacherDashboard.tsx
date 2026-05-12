@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useIsMobile } from '../hooks/use-mobile';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Navbar } from '../components/Navbar';
@@ -93,6 +94,7 @@ const btnSecondary: React.CSSProperties = {
 const TeacherDashboardContent = () => {
   const { language } = useLanguage();
   const { user } = useAuth();
+  const isMobile = useIsMobile();
 
   // ── State ─────────────────────────────────────────────────
   const [teacherData, setTeacherData] = useState<any>(null);
@@ -418,7 +420,7 @@ const TeacherDashboardContent = () => {
     <div style={{ minHeight: '100vh', background: 'var(--bg-primary, #0f0f1a)', color: 'var(--text-primary, #fff)', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
 
-      <main style={{ flex: 1, padding: '24px 16px', maxWidth: 1100, margin: '0 auto', width: '100%' }}>
+      <main style={{ flex: 1, padding: isMobile ? '72px 12px 24px' : '80px 16px 24px', maxWidth: 1100, margin: '0 auto', width: '100%' }}>
 
         {/* Flash messages */}
         {flashMsg && (
@@ -433,7 +435,7 @@ const TeacherDashboardContent = () => {
         )}
 
         {/* ── Header card ─────────────────────────────────── */}
-        <div style={{ background: 'var(--bg-card, #1a1a2e)', borderRadius: 16, padding: 24, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ background: 'var(--bg-card, #1a1a2e)', borderRadius: 16, padding: isMobile ? 16 : 24, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setShowProfileUpload(true)}>
             {profileImg ? (
               <img src={profileImg} alt="profile" style={{ width: 72, height: 72, borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--accent, #4f8ef7)' }} />
@@ -459,7 +461,7 @@ const TeacherDashboardContent = () => {
         </div>
 
         {/* ── Stats row ────────────────────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 16, marginBottom: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(auto-fit,minmax(160px,1fr))', gap: isMobile ? 10 : 16, marginBottom: 24 }}>
           {[
             { icon: <Users size={22} color="#4f8ef7" />, label: t.students, value: myStudents.length, bg: 'rgba(79,142,247,0.12)', color: '#4f8ef7' },
             { icon: <Calendar size={22} color="#f59e0b" />, label: t.todayTitle, value: todayBookings.length, bg: 'rgba(245,158,11,0.12)', color: '#f59e0b' },
@@ -467,7 +469,7 @@ const TeacherDashboardContent = () => {
             { icon: <MessageCircle size={22} color="#a78bfa" />, label: t.messages, value: bookingMessagesCount, bg: 'rgba(167,139,250,0.12)', color: '#a78bfa' },
             { icon: <Video size={22} color="#34d399" />, label: t.videos, value: videos.length, bg: 'rgba(52,211,153,0.12)', color: '#34d399' },
           ].map((s, i) => (
-            <div key={i} style={{ background: 'var(--bg-card, #1a1a2e)', borderRadius: 14, padding: '18px 20px', border: '1px solid rgba(255,255,255,0.07)' }}>
+            <div key={i} style={{ background: 'var(--bg-card, #1a1a2e)', borderRadius: 14, padding: isMobile ? '14px 12px' : '18px 20px', border: '1px solid rgba(255,255,255,0.07)' }}>
               <div style={{ width: 44, height: 44, borderRadius: 12, background: s.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>{s.icon}</div>
               <div style={{ fontSize: 26, fontWeight: 700, color: s.color }}>{s.value}</div>
               <div style={{ fontSize: 12, color: 'var(--text-secondary, #aaa)', marginTop: 2 }}>{s.label}</div>
@@ -504,7 +506,7 @@ const TeacherDashboardContent = () => {
         </div>
 
         {/* ── Quick actions ─────────────────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(auto-fit,minmax(180px,1fr))', gap: isMobile ? 10 : 14 }}>
           {[
             { icon: <Users size={24} color="#4f8ef7" />, label: t.students, bg: 'rgba(79,142,247,0.1)', border: 'rgba(79,142,247,0.25)', action: () => setShowStudents(true) },
             { icon: <Video size={24} color="#34d399" />, label: t.videos, bg: 'rgba(52,211,153,0.1)', border: 'rgba(52,211,153,0.25)', action: () => setShowVideos(true) },
