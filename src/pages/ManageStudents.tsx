@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { supabase, BACKEND_URL } from '../supabase';
+import { supabase, BACKEND_URL, adminFetch } from '../supabase';
 import { User, Plus, Edit, Trash2, Mail, Phone, Calendar, Check, X, ArrowLeft, IdCard, Bike, Car, Truck, GraduationCap, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../components/style/theme.css';
@@ -150,7 +150,7 @@ const ManageStudentsContent = () => {
     const confirmMessage = language === 'ar' ? `هل أنت متأكد من حذف الطالب "${studentName}"؟` : language === 'fr' ? `Êtes-vous sûr de supprimer l'étudiant "${studentName}"?` : `Are you sure you want to delete student "${studentName}"?`;
     if (!window.confirm(confirmMessage)) return;
     try {
-      const response = await fetch(`${BACKEND_URL}/admin/delete-user/${studentId}`, { method: 'DELETE' });
+      const response = await adminFetch(`/admin/delete-user/${studentId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Delete failed');
       setMessage(language === 'ar' ? 'تم حذف الطالب بنجاح!' : language === 'fr' ? 'Étudiant supprimé avec succès!' : 'Student deleted successfully!');
       fetchStudents();

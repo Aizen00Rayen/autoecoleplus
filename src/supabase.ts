@@ -11,5 +11,27 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
-// Backend API URL for admin operations requiring service_role
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+// Backend URL — points to Supabase Edge Functions in production / mobile
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ||
+  `${supabaseUrl}/functions/v1`;
+
+/**
+ * Authenticated fetch wrapper for admin-only edge function calls.
+ * Automatically attaches the current user's JWT as a Bearer token.
+ */
+export const adminFetch = async (
+  path: string,
+  options: RequestInit = {}
+): Promise<Response> => {
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token;
+
+  return fetch(`${BACKEND_URL}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(options.headers as Record<string, string> || {}),
+    },
+  });
+};

@@ -352,10 +352,10 @@ const VideosContent = () => {
                     onClick={() => handleLike(selectedVideo.id)}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 5,
-                      background: 'none', border: 'none', cursor: 'pointer',
+                      border: 'none', cursor: 'pointer',
                       color: userLikes[selectedVideo.id] ? '#EF4444' : 'var(--text-muted)',
                       padding: '4px 10px', borderRadius: 'var(--radius-full)',
-                      background: userLikes[selectedVideo.id] ? 'rgba(239,68,68,0.1)' : 'transparent',
+                      background: userLikes[selectedVideo.id] ? 'rgba(239,68,68,0.1)' : 'none',
                       transition: 'all 0.2s ease', fontSize: '0.875rem',
                     } as any}
                   >

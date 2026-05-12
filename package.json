@@ -8,11 +8,15 @@
         "dev:backend": "cd backend && node server.js",
         "dev:all": "concurrently \"npm run dev\" \"npm run dev:backend\"",
         "build": "tsc -b && vite build",
+        "build:mobile": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
         "test": "vitest --run"
     },
     "dependencies": {
+        "@capacitor/android": "^8.3.4",
+        "@capacitor/cli": "^8.3.4",
+        "@capacitor/core": "^8.3.4",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-alert-dialog": "^1.1.15",
         "@radix-ui/react-aspect-ratio": "^1.1.8",

@@ -163,10 +163,10 @@ const TeacherBookingsContent = () => {
     if (!window.confirm(confirmMessage)) return;
 
     try {
-      await updateDoc(doc(db, 'bookings', bookingId), {
+      await supabase.from('bookings').update({
         status: 'rejected',
         updatedAt: new Date().toISOString()
-      });
+      }).eq('id', bookingId);
 
       setMessage(
         language === 'ar'

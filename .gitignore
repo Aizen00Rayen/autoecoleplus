@@ -34,3 +34,6 @@ pnpm-debug.log*
 
 # Claude Code
 .claude/
+
+# Capacitor Android generated project
+android/

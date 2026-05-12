@@ -5,7 +5,7 @@ import { Footer } from '../components/Footer';
 import WorkDaysSelector from '../components/WorkDaysSelector';
 import type { WorkDays } from '../utils/scheduleGenerator';
 import { getDefaultWorkDays } from '../utils/scheduleGenerator';
-import { supabase, BACKEND_URL } from '../supabase';
+import { supabase, BACKEND_URL, adminFetch } from '../supabase';
 import { User, Plus, Edit, Trash2, Mail, Phone, Calendar, Check, X, ArrowLeft, Bike, Car, Truck, ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../components/style/theme.css';
@@ -203,7 +203,7 @@ const ManageTeachersContent = () => {
     if (!window.confirm(confirmMessage)) return;
 
     try {
-      const response = await fetch(`${BACKEND_URL}/admin/delete-user/${teacherId}`, { method: 'DELETE' });
+      const response = await adminFetch(`/admin/delete-user/${teacherId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Delete failed');
 
       setMessage(
