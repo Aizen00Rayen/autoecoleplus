@@ -1,0 +1,413 @@
+.learning-materials-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+}
+
+.learning-materials-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.learning-materials-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.learning-materials-subtitle {
+    color: #64748b;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.search-container {
+    max-width: 48rem;
+    margin: 0 auto 3rem;
+    position: relative;
+}
+
+.search-input {
+    padding-left: 3rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+    border: 2px solid #dbeafe;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.rule-card {
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: white;
+}
+
+.rule-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+}
+
+.rule-card-content {
+    padding: 1.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.rule-icon-container {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.rule-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: white;
+}
+
+.rule-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1e293b;
+}
+
+.rule-content {
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.tabs-container {
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tab-trigger {
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-trigger:hover {
+    background: #f1f5f9;
+}
+
+.tab-trigger[data-state="active"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+}
+
+.signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.sign-card {
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: white;
+}
+
+.sign-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+}
+
+.sign-card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sign-icon-wrapper {
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sign-icon-wrapper.shape-circle {
+    border-radius: 50%;
+}
+
+.sign-icon-wrapper.shape-square {
+    border-radius: 0.5rem;
+}
+
+.sign-icon-wrapper.shape-triangle {
+    width: 0;
+    height: 0;
+    border-left: 3.5rem solid transparent;
+    border-right: 3.5rem solid transparent;
+    border-bottom: 6rem solid;
+    border-bottom-color: inherit;
+    background: transparent !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.sign-icon-wrapper.shape-triangle .sign-icon {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.sign-icon-wrapper.shape-octagon {
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    border-radius: 0;
+}
+
+.sign-card:hover .sign-icon-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.sign-card:hover .sign-icon-wrapper.shape-triangle {
+    transform: scale(1.05) translateY(-2px);
+}
+
+.sign-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.sign-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-description {
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    min-height: 4rem;
+}
+
+.sign-shape-indicator {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    padding: 0.5rem 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-results-icon {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1rem;
+    color: #cbd5e1;
+}
+
+.no-results-text {
+    color: #94a3b8;
+    font-size: 1.125rem;
+}
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.warning {
+    background: white;
+    border-color: #fca5a5;
+}
+
+.stat-card.prohibition {
+    background: white;
+    border-color: #f87171;
+}
+
+.stat-card.mandatory {
+    background: white;
+    border-color: #93c5fd;
+}
+
+.stat-card.information {
+    background: white;
+    border-color: #86efac;
+}
+
+.stat-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-card.warning .stat-icon,
+.stat-card.warning .stat-number {
+    color: #dc2626;
+}
+
+.stat-card.warning .stat-label {
+    color: #991b1b;
+}
+
+.stat-card.prohibition .stat-icon,
+.stat-card.prohibition .stat-number {
+    color: #dc2626;
+}
+
+.stat-card.prohibition .stat-label {
+    color: #991b1b;
+}
+
+.stat-card.mandatory .stat-icon,
+.stat-card.mandatory .stat-number {
+    color: #2563eb;
+}
+
+.stat-card.mandatory .stat-label {
+    color: #1e40af;
+}
+
+.stat-card.information .stat-icon,
+.stat-card.information .stat-number {
+    color: #16a34a;
+}
+
+.stat-card.information .stat-label {
+    color: #15803d;
+}
+
+@media (max-width: 768px) {
+    .learning-materials-title {
+        font-size: 2rem;
+    }
+
+    .learning-materials-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .signs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

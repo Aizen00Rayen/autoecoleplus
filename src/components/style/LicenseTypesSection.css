@@ -1,0 +1,413 @@
+/* License Types Section - Unified Simple Background */
+
+.license-types-section {
+    padding: 5rem 1.5rem;
+    position: relative;
+    background: #f8fafc;
+    overflow: hidden;
+}
+
+.license-types-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.license-types-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+    pointer-events: none;
+}
+
+.license-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.license-title-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.license-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@media (min-width: 768px) {
+    .license-title {
+        font-size: 2.5rem;
+    }
+}
+
+.license-divider {
+    width: 6rem;
+    height: 0.25rem;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9999px;
+}
+
+.license-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .license-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.license-card-wrapper {
+    height: 100%;
+}
+
+.license-card {
+    position: relative;
+    height: 100%;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+}
+
+.license-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--license-color-1), var(--license-color-2));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.license-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.15),
+        0 10px 10px -5px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.license-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Gradient Backgrounds */
+.license-gradient-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.license-gradient-a {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.license-gradient-b {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+}
+
+.license-gradient-c {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+}
+
+.license-card:hover .license-gradient-bg {
+    opacity: 1;
+}
+
+/* Icon Container - Matching Features Section Style */
+.license-icon-container {
+    position: relative;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.license-icon-container-a {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+}
+
+.license-icon-container-b {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+}
+
+.license-icon-container-c {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+}
+
+.license-card-wrapper:nth-child(1) .license-card {
+    --license-color-1: #f97316;
+    --license-color-2: #f59e0b;
+}
+
+.license-card-wrapper:nth-child(2) .license-card {
+    --license-color-1: #3b82f6;
+    --license-color-2: #06b6d4;
+}
+
+.license-card-wrapper:nth-child(3) .license-card {
+    --license-color-1: #a855f7;
+    --license-color-2: #ec4899;
+}
+
+/* Hover effect matching Features Section */
+.license-card:hover .license-icon-container-a {
+    background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%);
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+}
+
+.license-card:hover .license-icon-container-b {
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.license-card:hover .license-icon-container-c {
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+}
+
+.license-icon {
+    height: 2rem;
+    width: 2rem;
+    transition: all 0.3s ease;
+}
+
+/* Icon color changes */
+.license-icon-container-a .license-icon {
+    color: #f97316;
+}
+
+.license-icon-container-b .license-icon {
+    color: #3b82f6;
+}
+
+.license-icon-container-c .license-icon {
+    color: #a855f7;
+}
+
+.license-card:hover .license-icon {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Content */
+.license-card-title {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    z-index: 1;
+    line-height: 1.4;
+}
+
+.license-card-description {
+    position: relative;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex: 1;
+    z-index: 1;
+    font-size: 0.9375rem;
+}
+
+/* CTA Button - Enhanced Professional Style */
+.license-cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 0.75rem;
+    color: white;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    z-index: 1;
+    box-shadow:
+        0 4px 12px rgba(102, 126, 234, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.license-cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.license-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 20px rgba(102, 126, 234, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.license-cta-button:hover::before {
+    opacity: 1;
+}
+
+.license-cta-button:active {
+    transform: translateY(0);
+    box-shadow:
+        0 4px 12px rgba(102, 126, 234, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.license-cta-icon {
+    height: 1rem;
+    width: 1rem;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.license-cta-button:hover .license-cta-icon {
+    transform: translateX(4px);
+}
+
+.license-cta-button>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] .license-cta-button {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .license-cta-button:hover .license-cta-icon {
+    transform: translateX(-4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .license-types-section {
+        padding: 2.5rem 1rem;
+    }
+
+    .license-title-container {
+        margin-bottom: 2rem;
+    }
+
+    .license-title {
+        font-size: 1.75rem;
+    }
+
+    .license-grid {
+        gap: 1rem;
+    }
+
+    .license-card {
+        padding: 1.25rem;
+    }
+
+    .license-icon-container {
+        height: 3rem;
+        width: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .license-icon {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .license-card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .license-card-description {
+        margin-bottom: 1rem;
+    }
+
+    .license-cta-button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .license-types-section {
+        padding: 2rem 0.75rem;
+    }
+
+    .license-title {
+        font-size: 1.5rem;
+    }
+
+    .license-grid {
+        grid-template-columns: 1fr;
+        gap: 0.875rem;
+    }
+
+    .license-card-title {
+        font-size: 1.25rem;
+    }
+
+    .license-card-description {
+        font-size: 0.875rem;
+    }
+}
