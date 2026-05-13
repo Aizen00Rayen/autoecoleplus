@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.autoecole.pro',
-  appName: 'Auto-École Pro',
+  appId: 'com.autoecole.plus',
+  appName: 'Auto Ecole Plus',
   webDir: 'dist',
   server: {
     androidScheme: 'https',

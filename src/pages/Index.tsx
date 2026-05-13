@@ -144,7 +144,7 @@ const Index = () => {
               </span>
               <br/>
               <span style={{ color:'rgba(255,255,255,0.55)', fontSize:'0.72em', fontWeight:700 }}>
-                {t('مدرسة MY-DRIVE للسياقة', 'avec MY-DRIVE', 'with MY-DRIVE')}
+                {t('مدرسة أوتو إيكول بلوس', 'Auto Ecole Plus', 'Auto Ecole Plus')}
               </span>
             </h1>
 

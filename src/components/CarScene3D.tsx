@@ -105,7 +105,7 @@ function DividerBar() {
   });
   return (
     <mesh ref={mesh} position={[0, -0.26, 0]}>
-      <boxGeometry args={[5.6, 0.038, 0.038]} />
+      <boxGeometry args={[6.2, 0.038, 0.038]} />
       <meshStandardMaterial color="#F5A623" emissive="#F5A623" emissiveIntensity={1.4} />
     </mesh>
   );
@@ -114,8 +114,8 @@ function DividerBar() {
 /* ─── Corner accent diamonds ─────────────────────────────────── */
 function CornerDiamonds() {
   const positions: [number, number, number][] = [
-    [-2.9,  0.72, 0], [2.9,  0.72, 0],
-    [-2.9, -0.72, 0], [2.9, -0.72, 0],
+    [-3.2,  0.72, 0], [3.2,  0.72, 0],
+    [-3.2, -0.72, 0], [3.2, -0.72, 0],
   ];
   return (
     <>
@@ -141,17 +141,17 @@ function BrandText() {
 
   return (
     <group ref={group} position={[0, 0.1, 0]}>
-      {/* AUTO */}
+      {/* AUTO ECOLE */}
       <Text
         position={[0, 0.72, 0]}
-        fontSize={1.18}
-        letterSpacing={0.12}
+        fontSize={0.84}
+        letterSpacing={0.14}
         color="#FFFFFF"
         anchorX="center"
         anchorY="middle"
         font={undefined}
       >
-        AUTO
+        AUTO ECOLE
         <meshStandardMaterial
           color="#FFFFFF"
           emissive="#FFFFFF"
@@ -164,37 +164,23 @@ function BrandText() {
       {/* Divider bar */}
       <DividerBar />
 
-      {/* ÉCOLE */}
+      {/* PLUS */}
       <Text
         position={[0, -0.72, 0]}
-        fontSize={1.18}
-        letterSpacing={0.08}
+        fontSize={1.42}
+        letterSpacing={0.22}
         anchorX="center"
         anchorY="middle"
         font={undefined}
       >
-        ÉCOLE
+        PLUS
         <meshStandardMaterial
           color="#F5A623"
           emissive="#F5A623"
-          emissiveIntensity={0.55}
+          emissiveIntensity={0.65}
           metalness={0.3}
           roughness={0.4}
         />
-      </Text>
-
-      {/* MY-DRIVE subtitle */}
-      <Text
-        position={[0, -1.62, 0]}
-        fontSize={0.26}
-        letterSpacing={0.26}
-        color="rgba(255,255,255,0.35)"
-        anchorX="center"
-        anchorY="middle"
-        font={undefined}
-      >
-        MY - DRIVE
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.35} />
       </Text>
 
       {/* Corner accents */}
