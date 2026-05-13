@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import { Menu, X, Globe, Car, ChevronDown, LogOut, User } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, LogOut, User } from 'lucide-react';
 import { supabase } from '../supabase';
 import './style/theme.css';
 import './style/Navbar.css';
@@ -94,11 +94,12 @@ export const Navbar = () => {
 
         {/* Logo */}
         <Link to="/" className="logo">
-          <div className={`logo-icon${logoUrl ? ' has-image' : ''}`}>
-            {logoUrl
-              ? <img src={logoUrl} alt="logo" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
-              : <Car size={20} />
-            }
+          <div className="logo-icon has-image">
+            <img
+              src={logoUrl || '/logo.jpg'}
+              alt="logo"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+            />
           </div>
           <span className="logo-text">
             {language === 'ar' ? 'أوتو إيكول بلوس' : 'Auto Ecole Plus'}
