@@ -35,5 +35,8 @@ pnpm-debug.log*
 # Claude Code
 .claude/
 
-# Capacitor Android generated project
-android/
+# Android build artifacts only (keep android/ source in git for CI)
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties

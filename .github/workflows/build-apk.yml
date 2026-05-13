@@ -42,7 +42,9 @@ jobs:
 
       # ── Capacitor sync ───────────────────────────────────────────
       - name: Sync Capacitor
-        run: npx cap sync android
+        run: |
+          [ -d "android" ] || npx cap add android
+          npx cap sync android
 
       # ── Android SDK ──────────────────────────────────────────────
       - name: Set up Android SDK
