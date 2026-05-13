@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer';
 import {
   Calendar, Users, Clock, CheckCircle, FileText, TrendingUp,
   Info, User, Mail, Phone, IdCard, RefreshCw, Loader2, Upload,
-  Camera, Video, Play, Trash2, Plus, Star, Eye, Heart, MessageCircle,
+  Camera, Video, Play, Trash2, Plus, Eye, Heart, MessageCircle,
   X, ChevronRight, BookOpen, Award
 } from 'lucide-react';
 import { supabase } from '../supabase';
@@ -113,16 +113,10 @@ const TeacherDashboardContent = () => {
   const [showVideos, setShowVideos] = useState(false);
   const [showWorkDays, setShowWorkDays] = useState(false);
   const [showProfileUpload, setShowProfileUpload] = useState(false);
-  const [showEval, setShowEval] = useState(false);
+
   const [showReports, setShowReports] = useState(false);
   const [showLicenseChange, setShowLicenseChange] = useState(false);
   const [showVideoUpload, setShowVideoUpload] = useState(false);
-
-  // Eval
-  const [evalStudent, setEvalStudent] = useState<any>(null);
-  const [evalText, setEvalText] = useState('');
-  const [evalRating, setEvalRating] = useState(0);
-  const [isSavingEval, setIsSavingEval] = useState(false);
 
   // License change
   const [licenseForm, setLicenseForm] = useState({ requestedLicenseType: '', reason: '' });
@@ -319,32 +313,6 @@ const TeacherDashboardContent = () => {
     setVideos(prev => prev.filter(v => v.id !== videoId));
   };
 
-  const handleSaveEval = async () => {
-    if (!evalStudent || !evalText || evalRating === 0) { flash(language === 'ar' ? 'يرجى ملء جميع الحقول' : 'Please fill all fields', true); return; }
-    setIsSavingEval(true);
-    await supabase.from('evaluations').upsert({
-      studentId: evalStudent.id,
-      teacherId: user?.uid,
-      comment: evalText,
-      rating: evalRating,
-      updatedAt: new Date().toISOString(),
-    }, { onConflict: 'studentId,teacherId' });
-    setIsSavingEval(false);
-    setShowEval(false);
-    setEvalText('');
-    setEvalRating(0);
-    setEvalStudent(null);
-    flash(language === 'ar' ? 'تم حفظ التقييم' : language === 'fr' ? 'Évaluation sauvegardée' : 'Evaluation saved');
-  };
-
-  const openEval = async (student: any) => {
-    setEvalStudent(student);
-    const { data } = await supabase.from('evaluations').select('*').eq('studentId', student.id).eq('teacherId', user?.uid).single();
-    if (data) { setEvalText(data.comment || ''); setEvalRating(data.rating || 0); }
-    else { setEvalText(''); setEvalRating(0); }
-    setShowEval(true);
-  };
-
   const handleLoadReport = async () => {
     if (!user?.uid) return;
     setLoadingReport(true);
@@ -391,7 +359,6 @@ const TeacherDashboardContent = () => {
     upload: language === 'ar' ? 'رفع فيديو' : language === 'fr' ? 'Téléverser' : 'Upload Video',
     save: language === 'ar' ? 'حفظ' : language === 'fr' ? 'Enregistrer' : 'Save',
     cancel: language === 'ar' ? 'إلغاء' : language === 'fr' ? 'Annuler' : 'Cancel',
-    evaluate: language === 'ar' ? 'تقييم' : language === 'fr' ? 'Évaluer' : 'Evaluate',
     delete: language === 'ar' ? 'حذف' : language === 'fr' ? 'Supprimer' : 'Delete',
     noStudents: language === 'ar' ? 'لا يوجد طلاب بعد' : language === 'fr' ? 'Aucun étudiant' : 'No students yet',
     noVideos: language === 'ar' ? 'لا توجد فيديوهات' : language === 'fr' ? 'Aucune vidéo' : 'No videos yet',
@@ -401,8 +368,6 @@ const TeacherDashboardContent = () => {
     selectVideo: language === 'ar' ? 'اختر فيديو' : language === 'fr' ? 'Choisir une vidéo' : 'Select Video',
     titleLabel: language === 'ar' ? 'العنوان' : language === 'fr' ? 'Titre' : 'Title',
     descLabel: language === 'ar' ? 'الوصف' : language === 'fr' ? 'Description' : 'Description',
-    rating: language === 'ar' ? 'التقييم' : language === 'fr' ? 'Note' : 'Rating',
-    comment: language === 'ar' ? 'التعليق' : language === 'fr' ? 'Commentaire' : 'Comment',
     requestedType: language === 'ar' ? 'نوع الرخصة المطلوب' : language === 'fr' ? 'Type de permis demandé' : 'Requested License Type',
     reason: language === 'ar' ? 'السبب' : language === 'fr' ? 'Raison' : 'Reason',
     send: language === 'ar' ? 'إرسال الطلب' : language === 'fr' ? 'Envoyer' : 'Send Request',
@@ -612,51 +577,10 @@ const TeacherDashboardContent = () => {
                     <div style={{ fontWeight: 600, fontSize: 14 }}>{s.fullName}</div>
                     <div style={{ fontSize: 12, color: 'var(--text-secondary,#aaa)', marginTop: 2 }}>{s.email} · {s.licenseType || '—'}</div>
                   </div>
-                  <button onClick={() => openEval(s)} style={{ ...btnSecondary, padding: '6px 14px', fontSize: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Star size={13} /> {t.evaluate}
-                  </button>
                 </div>
               ))}
             </div>
           )}
-        </Overlay>
-      )}
-
-      {/* ════════════════════════════════════════════════════ */}
-      {/* MODAL: Evaluate Student                             */}
-      {/* ════════════════════════════════════════════════════ */}
-      {showEval && evalStudent && (
-        <Overlay onClose={() => setShowEval(false)} maxWidth={480}>
-          <ModalHeader title={`${t.evaluate}: ${evalStudent.fullName}`} onClose={() => setShowEval(false)} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div>
-              <div style={{ fontSize: 13, color: 'var(--text-secondary,#aaa)', marginBottom: 8 }}>{t.rating}</div>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {[1,2,3,4,5].map(n => (
-                  <button key={n} onClick={() => setEvalRating(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                    <Star size={28} fill={n <= evalRating ? '#f59e0b' : 'none'} color={n <= evalRating ? '#f59e0b' : 'rgba(255,255,255,0.3)'} />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 13, color: 'var(--text-secondary,#aaa)', marginBottom: 8 }}>{t.comment}</div>
-              <textarea
-                value={evalText}
-                onChange={e => setEvalText(e.target.value)}
-                rows={4}
-                style={{ ...inputStyle, resize: 'vertical' }}
-                placeholder={language === 'ar' ? 'اكتب تعليقك هنا...' : language === 'fr' ? 'Écrivez votre commentaire...' : 'Write your comment here...'}
-              />
-            </div>
-            <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-              <button onClick={() => setShowEval(false)} style={btnSecondary}>{t.cancel}</button>
-              <button onClick={handleSaveEval} disabled={isSavingEval} style={{ ...btnPrimary, display: 'flex', alignItems: 'center', gap: 8 }}>
-                {isSavingEval ? <Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> : <CheckCircle size={15} />}
-                {t.save}
-              </button>
-            </div>
-          </div>
         </Overlay>
       )}
 

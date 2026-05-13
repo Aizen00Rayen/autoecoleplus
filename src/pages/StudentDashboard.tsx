@@ -8,7 +8,7 @@ import { Footer } from '../components/Footer';
 import {
   Calendar, BookOpen, Car, Trophy, Clock, User, FileText, Video,
   Info, Mail, Phone, IdCard, Upload, Camera, Check, Loader2,
-  Play, Heart, Eye, List, Star, X, GraduationCap, MessageCircle
+  Play, Heart, Eye, List, X, GraduationCap, MessageCircle
 } from 'lucide-react';
 import { supabase } from '../supabase';
 import '../components/style/theme.css';
@@ -50,7 +50,7 @@ const StudentDashboardContent = () => {
   // Data
   const [studentData, setStudentData] = useState<any>(null);
   const [teacherData, setTeacherData] = useState<any>(null);
-  const [teacherEval, setTeacherEval] = useState<any>(null);
+
   const [sessions, setSessions] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
   const [loadingVideos, setLoadingVideos] = useState(false);
@@ -86,8 +86,6 @@ const StudentDashboardContent = () => {
       if (data.teacherId) {
         const { data: t } = await supabase.from('users').select('*').eq('id', data.teacherId).single();
         if (t) setTeacherData(t);
-        const { data: ev } = await supabase.from('evaluations').select('*').eq('studentId', user.uid).eq('teacherId', data.teacherId).maybeSingle();
-        if (ev) setTeacherEval(ev);
       }
     })();
   }, [user?.uid]);
@@ -326,15 +324,6 @@ const StudentDashboardContent = () => {
             {infoRow(<IdCard size={16} color="#000" />, t('معرف الطالب', "ID de l'étudiant", 'Student ID'), (user?.uid || '').substring(0, 8).toUpperCase())}
             {infoRow(<Car size={16} color="#000" />, t('نوع الرخصة', 'Type de permis', 'License Type'), studentData?.licenseType || '')}
             {infoRow(<GraduationCap size={16} color="#000" />, t('المعلم', 'Moniteur', 'Instructor'), teacherData?.fullName || t('لم يُعيَّن', 'Non assigné', 'Not assigned'))}
-            {teacherEval && (
-              <div style={{ padding: '1rem', background: 'rgba(245,166,35,0.08)', border: '1px solid var(--border-gold)', borderRadius: 'var(--radius-md)', marginTop: 8 }}>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary)', marginBottom: 6 }}>{t('تقييم المعلم', "Évaluation du moniteur", "Instructor's Evaluation")}</div>
-                <div style={{ display: 'flex', gap: 3, marginBottom: 6 }}>
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={15} style={{ color: s <= (teacherEval.rating || 0) ? '#f59e0b' : 'var(--border)', fill: s <= (teacherEval.rating || 0) ? '#f59e0b' : 'none' }} />)}
-                </div>
-                {teacherEval.comment && <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{teacherEval.comment}</p>}
-              </div>
-            )}
           </div>
         </Overlay>
       )}
