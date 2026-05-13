@@ -8,7 +8,7 @@ import { Footer } from '../components/Footer';
 import {
   Calendar, BookOpen, Car, Trophy, Clock, User, FileText, Video,
   Info, Mail, Phone, IdCard, Upload, Camera, Check, Loader2,
-  Play, Heart, Eye, List, X, GraduationCap, MessageCircle
+  Play, Heart, Eye, List, X, GraduationCap, MessageCircle, TriangleAlert
 } from 'lucide-react';
 import { supabase } from '../supabase';
 import '../components/style/theme.css';
@@ -279,6 +279,7 @@ const StudentDashboardContent = () => {
                 { icon: <List size={18} />, label: t('حصصي', 'Mes séances', 'My Sessions'), sub: `${sessions.length} ${t('حصة', 'séances', 'sessions')}`, badge: sessions.length || null, onClick: () => setShowSessions(true) },
                 { icon: <Calendar size={18} />, label: t('حجز موعد', 'Réserver un créneau', 'Book Appointment'), sub: t('احجز مع معلمك', 'Réserver avec votre moniteur', 'Book with your instructor'), onClick: () => navigate('/bookings') },
                 { icon: <BookOpen size={18} />, label: t('المواد التعليمية', 'Matériel pédagogique', 'Learning Materials'), sub: t('الدروس والمواد', 'Cours et matériel', 'Lessons & materials'), onClick: () => navigate('/learning-materials') },
+                { icon: <TriangleAlert size={18} />, label: t('لوحات التشوير', 'Panneaux de signalisation', 'Road Signs'), sub: t('تعلم علامات الطريق', 'Apprendre les panneaux', 'Learn road signs'), onClick: () => navigate('/student-signs') },
                 { icon: <Video size={18} />, label: t('الفيديوهات', 'Vidéos éducatives', 'Educational Videos'), sub: t('فيديوهات المعلم', 'Vidéos du moniteur', 'Instructor videos'), onClick: () => setShowVideos(true) },
                 { icon: <FileText size={18} />, label: t('الاختبارات', 'Tests', 'Tests'), sub: testScore !== null ? `${testScore}%` : t('اختبر معلوماتك', 'Testez vos connaissances', 'Test your knowledge'), badge: testScore !== null ? `${testScore}%` : null, onClick: () => { setCurrentQ(0); setAnswers({}); setTestDone(false); setTestResult(null); setShowTest(true); } },
                 { icon: <User size={18} />, label: t('معلمي', 'Mon moniteur', 'My Instructor'), sub: teacherData?.fullName || t('لم يُعيَّن', 'Non assigné', 'Not assigned'), badge: unreadCount || null, onClick: () => setShowTeacher(true) },

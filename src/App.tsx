@@ -37,6 +37,7 @@ import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import TestCreateAccounts from "./pages/TestCreateAccounts";
 import AdminSigns from "./pages/AdminSigns";
+import StudentSigns from "./pages/StudentSigns";
 
 const queryClient = new QueryClient();
 
@@ -160,8 +161,16 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/bookings" 
+            <Route
+              path="/student-signs"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <StudentSigns />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bookings"
               element={
                 <ProtectedRoute allowedRoles={['student']}>
                   <BookingPage />
